@@ -1,0 +1,139 @@
+tmpWorkingArray={
+  "name": "sam",
+  "date": "yesterday",
+  "family": {
+    "sisters": 1,
+    "brothers": 2,
+    "parents": 2,
+    "grandFolk": {
+
+      "tom": {
+        "age": 89,
+        "home": "left street"
+      },
+      "jane":{
+        "age": 80,
+        "home": "state street"
+      }
+      
+     },
+     "nieces": 1
+    
+    }
+  }
+
+var savedArray = [];
+function run(me){
+  for (var i in me){
+    if(typeof me[i] == 'object'){
+      console.log(i, '....', me[i]);
+      savedArray.push(i);
+      savedArray.push(me[i]);
+      run(me[i]);
+      debugger;
+    }
+  }
+}
+function run2(me){
+    for(var ii in me){
+        if(typeof me[ii] == 'object'){
+        console.log(ii, '...', me[ii]);
+        
+        run2(me[ii]);
+        }
+    }
+}
+    
+run(tmpWorkingArray);
+run2(savedArray);
+
+
+
+//========================
+  tmpWorkingArray={
+  "name": "sam",
+  "date": "yesterday",
+  "family": {
+    "sisters": 1,
+    "brothers": 2,
+    "parents": 2,
+    "grandFolk": {
+
+      "tom": {
+        "age": 89,
+        "home": "left street"
+      },
+      "jane":{
+        "age": 80,
+        "home": "state street"
+      }
+      
+     },
+     "nieces": 1
+    
+    }
+  }
+
+
+
+
+
+
+var savedArray=[];
+function runMakeToArray(obj){
+    for(var i in obj){
+      while(typeof obj[i] == "object){
+      //if(typeof obj[i] == "object"){
+        console.log("\n+++++object,", obj[i]);
+        savedArray.push();
+        runMakeToArray(obj[i]);
+      }
+  }
+    if(typeof obj[i] != "object'){
+      console.log(i);
+      console.log(obj);
+      console.log(obj[i]);
+      console.log('=============');
+      savedArray.push([i, obj[i]]);
+    }
+  }
+
+}
+
+runMakeToArray(tmpWorkingArray);
+  
+
+
+
+============================
+
+
+var savedArray=[]; var savedIndexesArray = [];
+var tally = 0; var objLength = 0;
+function runMakeToArray(obj){
+  for(var i in obj){
+    if(typeof obj[i] == "object"){
+      console.log(i);
+      console.log("\n+++++object,", obj[i]);
+
+      savedArray.push(i);
+      savedArray.push([obj[i], '...']);
+      for(var ii in obj){
+         objLength++;
+      }
+       savedIndexesArray.push([i, objLength]);
+  
+      console.log('tally', tally);
+      tally++;
+      runMakeToArray(obj[i]);
+    }else{
+        savedArray.push([i, obj[i]]);
+    }
+    debugger;
+  }
+
+}
+
+runMakeToArray(tmpWorkingArray);
+  
+

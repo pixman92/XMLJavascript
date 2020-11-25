@@ -1,0 +1,10 @@
+Log
+
+
+DONE:
+  -XML String
+    -takes in xml string
+    -prints it out
+    -splits the string into Array[]
+    -pulls a 'chunk' - end to end - from the array
+
