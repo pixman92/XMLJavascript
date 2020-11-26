@@ -45,7 +45,27 @@ function insertInToXML(arr1, arr2, pos){
 
 //=========================================
 
-
+workingArray={
+    "name": "sam",
+    "date": "yesterday",
+    "family": {
+      "sisters": 1,
+      "brothers": 2,
+      "parents": 2,
+      "grandFolk": {
+        "tom": {
+          "age": 89,
+          "home": "left street",
+        },
+        "jane":{
+          "age": 80,
+          "home": "state street",
+        },
+       },
+       "nieces": 1,
+      }
+    };
+    
 function state(tag, inner){
 
 }
