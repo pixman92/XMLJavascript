@@ -32,9 +32,11 @@ function fromXMLStringToArray(stringMe){
     
 }
 
-var joinMe;
-function bindForSaving(joinMe=savedXMLArray){
-  return joinMe.join('');
+var joinMe = "";
+function bindForSaving(passed){
+  joinMe = passed.join('');
+  console.log('variable - joinMe', joinMe);
+  return joinMe;
 }
 
 
@@ -64,11 +66,19 @@ function insertInToXML(arr1, arr2, pos){
 
 }
 
+function editWithinXML(searchTerm){
+
+}
+
+
+
 //=========================================
 function saveToLocal(passed){
     // stores data to localStorage()s
     if(!passed){
         console.log("nothing to save!")
+    }else if(typeof passed != 'string'){
+      console.log('Param needs to be String'); 
     }else{
         localStorage.setItem('XMLMe', passed);
     }
