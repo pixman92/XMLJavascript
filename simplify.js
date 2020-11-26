@@ -44,6 +44,8 @@ function holdMe(passed){
 function insertInToXML(arr1, arr2, pos){
     //parsing data from one Array to a second Array
     arr1.splice(pos, 0, ...arr2);
+
+    console.log('Joined!\n'+arr1+' now increased');
 }
 
 //=========================================
