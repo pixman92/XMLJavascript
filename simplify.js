@@ -47,5 +47,9 @@ function insertInToXML(arr1, arr2, pos){
 
 
 function state(tag, inner){
+    makeXMLString(tag, inner);  //take in - spit out savedXMLString
+    fromXMLStringToArray(savedXMLString) // spits out savedXMLArray
+
+    
 
 }
