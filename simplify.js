@@ -31,11 +31,23 @@ function fromXMLStringToArray(stringMe){
     return savedXMLArray;
     
 }
+
+var joinMe;
+function bindForSaving(joinMe=savedXMLArray){
+  return joinMe.join('');
+}
+
+
+
 var hold;
-function holdMe(passed){
+function holdMe(passed, toBeJoined){
     //background data to be held, to compare old XML String
     hold = passed;
     console.log('data held! (hold)', hold);
+
+    if(toBeJoined){
+      hold.splice(0,0, ...savedXMLArray);
+    }
 }
 
 
@@ -49,12 +61,12 @@ function insertInToXML(arr1, arr2, pos){
 }
 
 //=========================================
-function saveToLocal(){
+function saveToLocal(passed){
     // stores data to localStorage()s
-    if(!savedXMLString){
+    if(!passed){
         console.log("nothing to save!")
     }else{
-        localStorage.setItem('XMLMe', savedXMLString);
+        localStorage.setItem('XMLMe', passed);
     }
   }
   
@@ -98,14 +110,14 @@ function makeIntoArray(){
       console.log(result);
       
 }
-function state(tag, inner){
+function state(tag, inner, join){
     //function to get off the ground
     makeXMLString(tag, inner);  //take in - spit out savedXMLString
     fromXMLStringToArray(savedXMLString) // spits out savedXMLArray
 
     
 
-    holdMe(savedXMLArray);
+    holdMe(savedXMLArray, join);
 
     
 }
