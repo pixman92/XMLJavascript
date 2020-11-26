@@ -27,6 +27,8 @@ function fromXMLStringToArray(stringMe){
     savedXMLArray = stringMe.split(/(?<=>)|(?=<)/g);
     console.log('savedXMLArray', savedXMLArray);
     
+    return savedXMLArray;
+    
 }
 var hold;
 function holdMe(passed){
@@ -45,27 +47,42 @@ function insertInToXML(arr1, arr2, pos){
 
 //=========================================
 
-workingArray={
-    "name": "sam",
-    "date": "yesterday",
-    "family": {
-      "sisters": 1,
-      "brothers": 2,
-      "parents": 2,
-      "grandFolk": {
-        "tom": {
-          "age": 89,
-          "home": "left street",
-        },
-        "jane":{
-          "age": 80,
-          "home": "state street",
-        },
-       },
-       "nieces": 1,
-      }
-    };
-    
-function state(tag, inner){
 
+function makeIntoArray(){
+    //function that takes in the working ob
+
+    workingArray={
+        "name": "sam",
+        "date": "yesterday",
+        "family": {
+          "sisters": 1,
+          "brothers": 2,
+          "parents": 2,
+          "grandFolk": {
+            "tom": {
+              "age": 89,
+              "home": "left street",
+            },
+            "jane":{
+              "age": 80,
+              "home": "state street",
+            },
+           },
+           "nieces": 1,
+          }
+        };
+    var result = Object.keys(workingArray).map(function(key) {
+        return [(key), workingArray[key]];
+      });
+      
+      console.log(result);
+      
+}
+function state(tag, inner){
+    makeXMLString(tag, inner); //makes the XML string
+    fromXMLStringToArray(savedXMLString); // uses the XML String -> to make an array
+
+    holdMe(savedXMLArray);
+
+    
 }
