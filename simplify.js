@@ -57,7 +57,7 @@ function insertInToXML(arr1, arr2, pos){
     //parsing data from one Array to a second Array
     if(Array.isArray(arr1)==true && Array.isArray(arr2)==true){
       arr1.splice(pos, 0, ...arr2);
-      console.log('Joined!\n'+arr1+' now increased');
+      console.log('Joined!\n'+arr1+' \n\nNow increased');
     }else{
       console.log('Params not Arrays!\nExiting');
     }
