@@ -11,4 +11,7 @@ DONE:
 
 
 steps:
-  - 
+  - make an XML string
+    - from an Array 
+  - from XML to array
+    - edit and save to XML

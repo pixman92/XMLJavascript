@@ -39,9 +39,10 @@ class XMLStringMe{
     //makes single elements
     //can be recursive -> re-enter the old elem into new elem
     
-    if(typeof text === 'object'){
-      console.log('its an array!');
-      var tmpArray=[];
+    if(typeof text === 'array'){
+
+      // console.log('its an array!');
+      var tmpArray=[];  //reset tmpArray  
       var tmpStr = "";
   
       tmpArray.push('<'+elem+'>');
@@ -64,6 +65,8 @@ class XMLStringMe{
       
       console.log("=====\nStep2? - addItemToArray( arrayForBuilding)")
       
+      debugger;
+
       //return this, push the ARRAY into <addItemToArray>
       return this.arrayForBuilding;
     }else{
@@ -84,8 +87,8 @@ class XMLStringMe{
     }
     
     this.allDataPulledBIG = strTmp.split(/(?<=>)|(?=<)/g);
-
-    // debugger;
+ 
+    debugger;
     
     globalBIGArray = this.allDataPulledBIG; //used for other functions, to act on divided Array[]
     
