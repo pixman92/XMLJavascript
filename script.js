@@ -161,6 +161,9 @@ function objToNthLevel(){
 
 var arrayOfDepths=[];
 function toXML(){
+  //seems to be the spot where XMLStringMe() is called
+  //and assigned a variable
+
   
   passing = new XMLStringMe();
   for(var elem in arr){

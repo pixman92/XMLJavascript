@@ -1,4 +1,6 @@
-// second attempt for XML decoding
+// OLD??
+// Any Unnessary code here??? POrbably
+
 
 var globalBIGArray = [];
 
