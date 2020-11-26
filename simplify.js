@@ -55,9 +55,13 @@ function holdMe(passed, toBeJoined){
 
 function insertInToXML(arr1, arr2, pos){
     //parsing data from one Array to a second Array
-    arr1.splice(pos, 0, ...arr2);
+    if(Array.isArray(arr1)==true && Array.isArray(arr2)==true){
+      arr1.splice(pos, 0, ...arr2);
+      console.log('Joined!\n'+arr1+' now increased');
+    }else{
+      console.log('Params not Arrays!\nExiting');
+    }
 
-    console.log('Joined!\n'+arr1+' now increased');
 }
 
 //=========================================
@@ -74,6 +78,7 @@ function saveToLocal(passed){
     // pulls data from localStorage()
     var pulled = localStorage.getItem('XMLMe');
     savedXMLString = pulled;
+    savedXMLArray = fromXMLStringToArray(savedXMLString);
     return savedXMLString;
   }
 
