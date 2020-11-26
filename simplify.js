@@ -23,6 +23,7 @@ var savedXMLArray = [];
 function fromXMLStringToArray(stringMe){
     //function that makes an Array from the XML String
 
+    //(after pulling from LocalStorage - run fromXMLStringToArray())
 
     savedXMLArray = stringMe.split(/(?<=>)|(?=<)/g);
     console.log('savedXMLArray', savedXMLArray);
@@ -46,10 +47,27 @@ function insertInToXML(arr1, arr2, pos){
 }
 
 //=========================================
+function saveToLocal(){
+    // stores data to localStorage()s
+    if(!savedXMLString){
+        console.log("nothing to save!")
+    }else{
+        localStorage.setItem('XMLMe', savedXMLString);
+    }
+  }
+  
+  function pullFromLocal(){
+    // pulls data from localStorage()
+    var pulled = localStorage.getItem('XMLMe');
+    savedXMLString = pulled;
+    return savedXMLString;
+  }
 
-
+    
+//========================================
 function makeIntoArray(){
-    //function that takes in the working ob
+    //function that takes in the working obj
+    //even NECESSARY??
 
     workingArray={
         "name": "sam",
@@ -79,8 +97,11 @@ function makeIntoArray(){
       
 }
 function state(tag, inner){
-    makeXMLString(tag, inner); //makes the XML string
-    fromXMLStringToArray(savedXMLString); // uses the XML String -> to make an array
+    //function to get off the ground
+    makeXMLString(tag, inner);  //take in - spit out savedXMLString
+    fromXMLStringToArray(savedXMLString) // spits out savedXMLArray
+
+    
 
     holdMe(savedXMLArray);
 
