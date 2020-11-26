@@ -8,3 +8,7 @@ DONE:
     -splits the string into Array[]
     -pulls a 'chunk' - end to end - from the array
 
+
+
+steps:
+  - 

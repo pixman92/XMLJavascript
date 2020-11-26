@@ -78,7 +78,7 @@ class XMLStringMe{
     
     //? is there an XML string already present?
     if(stringToSplit==""||!stringToSplit){
-      var strTmp = this.XMLString;
+      var strTmp = this.XMLString; 
     }else{
       var strTmp = stringToSplit;
     }

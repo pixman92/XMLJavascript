@@ -31,7 +31,7 @@ function passObjToXML(obj, objHead){
 
   // var tmpObj = {
   //   'name': 'sam',
-  //   'date': 'yesterday',
+  //   'date': 'yesterday', 
   //   'siblings': '2'
   // };
   
