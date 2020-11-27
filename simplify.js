@@ -19,6 +19,17 @@ function makeXMLString(tag, inner){
     console.log('current String (savedXMLString)', savedXMLString);
 }
 
+//===========================
+function makeXMLFromArray(arrayMe){
+ var tmp = [];
+ tmp.push('<'+arrayMe[0]+'>');
+ tmp.push(arrayMe[1]);
+ tmp.push('</'+arrayMe[0]+'>');
+ return tmp;
+}
+
+//===========================
+
 var savedXMLArray = [];
 function fromXMLStringToArray(stringMe){
     //function that makes an Array from the XML String
@@ -34,6 +45,9 @@ function fromXMLStringToArray(stringMe){
 
 var joinMe = "";
 function bindForSaving(passed){
+  //function to join Array elements
+  //then save them as String
+  //NEX? - run saveToLocal(passedArray)
   joinMe = passed.join('');
   console.log('variable - joinMe', joinMe);
   return joinMe;
@@ -57,6 +71,8 @@ function holdMe(passed, toBeJoined){
 
 function insertInToXML(arr1, arr2, pos){
     //parsing data from one Array to a second Array
+    //at a given position
+    //second param - number of elements to delete = 0
     if(Array.isArray(arr1)==true && Array.isArray(arr2)==true){
       arr1.splice(pos, 0, ...arr2);
       console.log('Joined!\n'+arr1+' \n\nNow increased');
@@ -65,16 +81,30 @@ function insertInToXML(arr1, arr2, pos){
     }
 
 }
+var index = []; 
+function editWithinXML(searchTermp, arrayMe){
+  //TODO - make XML editable
+  //HOW??
+  index = []; var ii=0;
 
-function editWithinXML(searchTerm){
-
+  for(var i=0; i<arrayMe.length; i++){
+      if(arrayMe[i] == '<name>'){
+          index.push(i)
+          for(var ii=i; ii<arrayMe.length; ii++){
+            if(arrayMe[ii]== '</name>'){
+              index.push(ii);
+            }
+          }
+      }
+  }
 }
 
 
 
 //=========================================
 function saveToLocal(passed){
-    // stores data to localStorage()s
+    // stores data to localStorage()
+    //make sure to only save XML as a String!
     if(!passed){
         console.log("nothing to save!")
     }else if(typeof passed != 'string'){
@@ -125,14 +155,43 @@ function makeIntoArray(){
       console.log(result);
       
 }
-function state(tag, inner, join){
-    //function to get off the ground
-    makeXMLString(tag, inner);  //take in - spit out savedXMLString
-    fromXMLStringToArray(savedXMLString) // spits out savedXMLArray
 
+var globalPass = "";
+function state(nameOfTask, tags){
+    //function to get off the groun/d
+    // makeXMLString(tag, inner);  //take in - spit out savedXMLString
+    // fromXMLStringToArray(savedXMLString) // spits out savedXMLArray/
+
+    //Chunk 1
+    //makes a <taskName> node
+    //saves to first[]
+    makeXMLString('taskName', nameOfTask);
+    fromXMLStringToArray(savedXMLString);
+    var first = savedXMLArray;
+
+
+    //Chuck 2
+    //makes <tags> node - to be dumped into first[]
+    makeXMLString('tags', tags);
+    fromXMLStringToArray(savedXMLString);
+    var second = savedXMLArray;
+
+    //concat the 2 arrays
+    insertInToXML(first, second, 3);
     
+    //Chunk 3
+    // take whole pile and inner it - to <task>
+    makeXMLString('task', first);
+    fromXMLStringToArray(savedXMLString);
 
-    holdMe(savedXMLArray, join);
 
-    
+    bindForSaving(savedXMLArray);
+
+    globalPass = joinMe;
+
+    // holdMe(savedXMLArray, join);   
+}
+
+function saveMe(){
+    saveToLocal(globalPass)
 }

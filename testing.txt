@@ -1,0 +1,10 @@
+var arr1 = ['<name>', 'sam', '</name>']
+var arr2 = ['<time>', 'late', '</time>']
+var arr3 = [
+  "<name>",
+  "sam",
+  "</name>",
+  "<time>",
+  "late",
+  "</time>"
+]
