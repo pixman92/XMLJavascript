@@ -19,3 +19,9 @@ steps:
 
 I/O Of this framework(?)
   - 
+
+2020, 12, 03 - 21:27:04 --- 
+
+2020, 12, 03 - 21:27:53 ---  Working on the Editing (Just a single tag) - it's working! NEXT? - delete tags, pull data from tags, UID in a tag!
+
+2020, 12, 03 - 21:35:27 --- Pulling indexes from XMLMe - not working...NEXT? - pull data from within Tags

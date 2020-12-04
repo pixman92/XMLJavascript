@@ -76,7 +76,7 @@ function holdMe(passed, toBeJoined){
 
 //=========================================
 
-function insertInToXML(arr1, arr2, pos){
+function insertArrayInToXML(arr1, arr2, pos){
     //parsing data from one Array to a second Array
     //at a given position
     //second param - number of elements to delete = 0
@@ -90,24 +90,102 @@ function insertInToXML(arr1, arr2, pos){
     return arr1;
 
 }
-var index = []; 
-function editWithinXML(searchTerm, arrayMe){
-  //TODO - make XML editable
-  //HOW??
-  index = []; var ii=0;
+//========================================
 
-  for(var i=0; i<arrayMe.length; i++){
-      if(arrayMe[i] == '<name>'){
-          index.push(i)
-          for(var ii=i; ii<arrayMe.length; ii++){
-            if(arrayMe[ii]== '</name>'){
-              index.push(ii);
-            }
-          }
-      }
+
+
+///========================================
+var pulledDataFromNamedTag=[];
+function pullData(serachTerm){
+  //function that pulls data from A BIG XMLString
+  //-searches
+  //-gets indexes
+  //-runs through the 'next of kin' array elems
+
+  //eg
+  // search <name>Sam</name> - getting Sam back!
+
+  pulledDataFromNamedTag=[];
+  searchXMLTags(serachTerm);
+
+  for(var i=0; i<foundIndexes.length; i+=2){
+    console.log('i',i);
+    var tmp = foundIndexes[i];
+
+    tmp++;
+    console.log('tmp', tmp);
+
+    // foundIndexes[i];
+    pulledDataFromNamedTag.push(XMLArray[tmp]);
   }
+
+  console.log('pulledDataFromNamedTag', pulledDataFromNamedTag);
+
 }
 
+
+// var index = []; 
+// function editWithinXML(searchTerm, arrayMe){
+//   //TODO - make XML editable
+//   //HOW??
+//   index = []; var ii=0;
+
+//   for(var i=0; i<arrayMe.length; i++){
+//       if(arrayMe[i] == '<name>'){
+//           index.push(i)
+//           for(var ii=i; ii<arrayMe.length; ii++){
+//             if(arrayMe[ii]== '</name>'){
+//               index.push(ii);
+//             }
+//           }
+//       }
+//   }
+// }
+
+//========================================
+function addDataToXMLArray(searchTerm, replacingData){
+  searchXMLTags(searchTerm);    //takes in XMLMe & a searchTerm
+
+
+  XMLArray[foundIndexes[0]+1]=replacingData;    //replaces the +1 (2nd) element of XMLArray
+
+  console.log('XML', XMLArray);
+  // bindForSaving()
+
+
+
+}
+
+
+//========================================
+var foundIndexes=[];
+var XMLArray=[];
+function searchXMLTags(searchTerm){
+  foundIndexes = [];
+  XMLArray = fromXMLStringToArray(XMLMe);
+
+    //logic that pulls all instances of an XML tag
+    //pushes those indexes to an Array
+    for(var i=0; i<XMLArray.length; i++){
+      if(XMLArray[i] == '<'+searchTerm+'>'){
+          // console.log('1 works', i);
+          foundIndexes.push(i);
+          // debugger;
+          for(var ii=i; ii<XMLArray.length; ii++){
+              if(XMLArray[ii] == '</'+searchTerm+'>'){
+                  // console.log('ii', ii);
+                  foundIndexes.push(ii);
+                  ii=XMLArray.length+1;
+              }
+              // debugger;
+          }
+          // console.log('foundIndexes.length', foundIndexes.length );
+          // i=foundIndexes[foundIndexes.length-1];
+      }
+  }
+  console.log('foundIndexes', foundIndexes);
+  return foundIndexes;
+}
 
 
 //=========================================
@@ -186,7 +264,7 @@ function state(nameOfTask, tags){
     var second = savedXMLArray;
 
     //concat the 2 arrays
-    insertInToXML(first, second, 3);
+    insertArrayInToXML(first, second, 3);
     
     //Chunk 3
     // take whole pile and inner it - to <task>
@@ -214,38 +292,15 @@ function stateTwo(){
   makeXMLString('duration', '10min');     // makes a new XMLString
   fromXMLStringToArray(savedXMLString);   // makes that into an Array
 
-  console.log('NEXT? - insertInToXML(holdForTmp, savedXMLArray, pos)'); // parrse one array into another
+  console.log('NEXT? - insertArrayInToXML(holdForTmp, savedXMLArray, pos)'); // parrse one array into another
 
   console.log('joined (from stateTwo)');   //saved for later. currently working on editing within the array
 
 }
-var foundIndexes=[];
-function stateThree(searchTerm){
+
+function stateThree(searchTerm, addData){
   //XMLMe - XML test string
-  foundIndexes = [];
-  var tmpArr = fromXMLStringToArray(XMLMe);
-
-  // tmpArr.forEach((elem, index)=>{
-  //   if('<'+searchTerm+'>' == elem){
-  //     foundIndexes.push(index);
-
-  //   }
-  // });
-
-  for(var i=0; i<tmpArr.length; i++){
-    if(tmpArr[i] == '<'+searchTerm+'>'){
-          foundIndexes.push(i);
-          for(var ii=i; ii<tmpArr.length; ii++){
-            if(tmpArr[ii] == '</'+searchTerm+'>'){
-              foundIndexes.push(ii);
-            }
-          }
-      }
-    
-  }
-
-  console.log('foundIndexes', foundIndexes);
-
+  
 
 
 }
