@@ -15,3 +15,7 @@ steps:
     - from an Array 
   - from XML to array
     - edit and save to XML
+
+
+I/O Of this framework(?)
+  - 

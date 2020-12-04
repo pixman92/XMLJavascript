@@ -4,6 +4,13 @@
 //   - from XML to array
 //     - edit and save to XML
 
+
+//========================================
+
+var XMLMe =  '<team>77<people><name>sam</name><name>tim</name><place>home</place></people></team>';
+
+
+//========================================
 var savedXMLString="";
 function makeXMLString(tag, inner){
     //function that makes an XML string from a passed;
@@ -47,7 +54,7 @@ var joinMe = "";
 function bindForSaving(passed){
   //function to join Array elements
   //then save them as String
-  //NEX? - run saveToLocal(passedArray)
+  //NEXT? - run saveToLocal(passedArray)
   joinMe = passed.join('');
   console.log('variable - joinMe', joinMe);
   return joinMe;
@@ -80,9 +87,11 @@ function insertInToXML(arr1, arr2, pos){
       console.log('Params not Arrays!\nExiting');
     }
 
+    return arr1;
+
 }
 var index = []; 
-function editWithinXML(searchTermp, arrayMe){
+function editWithinXML(searchTerm, arrayMe){
   //TODO - make XML editable
   //HOW??
   index = []; var ii=0;
@@ -194,4 +203,49 @@ function state(nameOfTask, tags){
 
 function saveMe(){
     saveToLocal(globalPass)
+}
+//========================================
+var holdForTmp=[];
+function stateTwo(){
+  //order of functioning
+  fromXMLStringToArray(XMLMe);    //makes XMLstring into an array
+
+  holdForTmp = savedXMLArray;     //holds XMLString (now an array)
+  makeXMLString('duration', '10min');     // makes a new XMLString
+  fromXMLStringToArray(savedXMLString);   // makes that into an Array
+
+  console.log('NEXT? - insertInToXML(holdForTmp, savedXMLArray, pos)'); // parrse one array into another
+
+  console.log('joined (from stateTwo)');   //saved for later. currently working on editing within the array
+
+}
+var foundIndexes=[];
+function stateThree(searchTerm){
+  //XMLMe - XML test string
+  foundIndexes = [];
+  var tmpArr = fromXMLStringToArray(XMLMe);
+
+  // tmpArr.forEach((elem, index)=>{
+  //   if('<'+searchTerm+'>' == elem){
+  //     foundIndexes.push(index);
+
+  //   }
+  // });
+
+  for(var i=0; i<tmpArr.length; i++){
+    if(tmpArr[i] == '<'+searchTerm+'>'){
+          foundIndexes.push(i);
+          for(var ii=i; ii<tmpArr.length; ii++){
+            if(tmpArr[ii] == '</'+searchTerm+'>'){
+              foundIndexes.push(ii);
+            }
+          }
+      }
+    
+  }
+
+  console.log('foundIndexes', foundIndexes);
+
+
+
 }
