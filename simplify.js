@@ -7,7 +7,7 @@
 
 //========================================
 
-var XMLMe =  '<team>77<people><name>sam</name><name>tim</name><place>home</place></people></team>';
+var XMLMe =  '<team><id>77</id><people><name>sam</name><name>tim</name><place>home</place></people></team><team><id>103</id><people><name>Leo</name></people></team>';
 
 
 //========================================
@@ -28,6 +28,7 @@ function makeXMLString(tag, inner){
 
 //===========================
 function makeXMLFromArray(arrayMe){
+  //small helper function -> to make XMLString from a .length == 3 array
  var tmp = [];
  tmp.push('<'+arrayMe[0]+'>');
  tmp.push(arrayMe[1]);
@@ -121,39 +122,24 @@ function pullData(serachTerm){
 
   console.log('pulledDataFromNamedTag', pulledDataFromNamedTag);
 
+  //pull Data => array of positions
+
+  //NEXT?
+  //goUp one child, by XMLMe[] <index> - 1
+
 }
-
-
-// var index = []; 
-// function editWithinXML(searchTerm, arrayMe){
-//   //TODO - make XML editable
-//   //HOW??
-//   index = []; var ii=0;
-
-//   for(var i=0; i<arrayMe.length; i++){
-//       if(arrayMe[i] == '<name>'){
-//           index.push(i)
-//           for(var ii=i; ii<arrayMe.length; ii++){
-//             if(arrayMe[ii]== '</name>'){
-//               index.push(ii);
-//             }
-//           }
-//       }
-//   }
-// }
-
 //========================================
 function addDataToXMLArray(searchTerm, replacingData){
-  searchXMLTags(searchTerm);    //takes in XMLMe & a searchTerm
-
-
+  //function that takes in XMLMe & a searchTerm
+  //pushes replacingData into position of Idex [0] + 1
+  //eg
+  //[1, 4, 5, 6]
+  //[0]+1 = <index at 0> + 1 => 2
+  searchXMLTags(searchTerm);    
   XMLArray[foundIndexes[0]+1]=replacingData;    //replaces the +1 (2nd) element of XMLArray
 
   console.log('XML', XMLArray);
   // bindForSaving()
-
-
-
 }
 
 
@@ -161,6 +147,13 @@ function addDataToXMLArray(searchTerm, replacingData){
 var foundIndexes=[];
 var XMLArray=[];
 function searchXMLTags(searchTerm){
+  //function that pulls matched indexes of search term (opening & ending, for each instance)
+  //the idea or "hoping" for - 1 open & close tag under the same name
+
+  //eg
+  //searching through 
+  //1pass for open, 2pass for closed
+  //pushed 2pass (ii) to nth pass (i)
   foundIndexes = [];
   XMLArray = fromXMLStringToArray(XMLMe);
 
@@ -188,7 +181,70 @@ function searchXMLTags(searchTerm){
 }
 
 
+//========================================
+function withinRange(uid){
+  var j=0; var l=1;
+  searchXMLTags('id');
+  pullWholeTag('id');
+  pulledDataFromNamedTag.forEach((elem)=>{
+    if(elem==uid){
+      
+    }
+  });
+  
+  while(j<foundIndexes.length){
+    var front = foundIndexes[j];
+    var rear = foundIndexes[l];
+    console.log('front', front);
+    console.log('rear', rear);
+    for(var i=front; i<=rear; i++){
+      console.log(savedXMLArray[i]);
+      // console.log('i');
+      // debugger;
+    }
+    j=l;
+    l++;
+  }
+
+
+  // searchXMLTags(searchTerm);
+
+
+
+}
+
+
+//========================================
+function pullWholeTag(searchTerm){
+  pullData(searchTerm);
+
+  var front = foundIndexes[0];
+  var rear = foundIndexes[1];
+  for(var i=front; i<=rear; i++){
+    console.log(savedXMLArray[i]);
+  }
+
+  // tmp = savedXMLArray[foundIndexes[0]-1];
+  // console.log('UpOneTag', tmp);
+
+}
+
+//========================================
+// USE INSTEAD
+// addDataToXMLArray()
+//========================================
+// function makeNewInner(newInner){
+//   //run pull whole tag,
+//   //then change the inner!
+
+//   // var tagName = foundIndexes[0];
+//   savedXMLArray[foundIndexes[0]+1] = newInner;
+//   console.log('New savdXMLArry\n', savedXMLArray);
+// }
+
+
 //=========================================
+//STATE RUN Functions
 function saveToLocal(passed){
     // stores data to localStorage()
     //make sure to only save XML as a String!
@@ -245,7 +301,7 @@ function makeIntoArray(){
 
 var globalPass = "";
 function state(nameOfTask, tags){
-    //function to get off the groun/d
+    //function to get off the ground
     // makeXMLString(tag, inner);  //take in - spit out savedXMLString
     // fromXMLStringToArray(savedXMLString) // spits out savedXMLArray/
 
