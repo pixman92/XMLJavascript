@@ -135,6 +135,9 @@ function addDataToXMLArray(searchTerm, replacingData){
   //eg
   //[1, 4, 5, 6]
   //[0]+1 = <index at 0> + 1 => 2
+
+  //this function is CRITICAL for identifying and changing XML data
+
   searchXMLTags(searchTerm);    
   XMLArray[foundIndexes[0]+1]=replacingData;    //replaces the +1 (2nd) element of XMLArray
 
@@ -182,29 +185,36 @@ function searchXMLTags(searchTerm){
 
 
 //========================================
+var indexSaved = [];
 function withinRange(uid){
+  //TODO - is this a place to look for given 'search term'
+
+  indexSaved = [];
   var j=0; var l=1;
   searchXMLTags('id');
   pullWholeTag('id');
-  pulledDataFromNamedTag.forEach((elem)=>{
+  pulledDataFromNamedTag.forEach((elem, index)=>{
     if(elem==uid){
-      
+      console.log('correct! ', elem, ' index of: ', index);
+      indexSaved.push(foundIndexes[index]);
     }
   });
+
+  console.log('indexSaved', indexSaved);
   
-  while(j<foundIndexes.length){
-    var front = foundIndexes[j];
-    var rear = foundIndexes[l];
-    console.log('front', front);
-    console.log('rear', rear);
-    for(var i=front; i<=rear; i++){
-      console.log(savedXMLArray[i]);
-      // console.log('i');
-      // debugger;
-    }
-    j=l;
-    l++;
-  }
+  // while(j<foundIndexes.length){
+  //   var front = foundIndexes[j];
+  //   var rear = foundIndexes[l];
+  //   console.log('front', front);
+  //   console.log('rear', rear);
+  //   for(var i=front; i<=rear; i++){
+  //     // console.log(savedXMLArray[i]);s
+  //     // console.log('i');
+  //     // debugger;
+  //   }
+  //   j=l;
+  //   l++;
+  // }
 
 
   // searchXMLTags(searchTerm);
@@ -214,7 +224,7 @@ function withinRange(uid){
 }
 
 
-//========================================
+//=======================================
 function pullWholeTag(searchTerm){
   pullData(searchTerm);
 
@@ -228,6 +238,58 @@ function pullWholeTag(searchTerm){
   // console.log('UpOneTag', tmp);
 
 }
+
+//========================================
+
+function diggingDirt(i){
+  var tmpArray = fromXMLStringToArray(XMLMe);
+
+  var word = tmpArray[i].substring(1, tmpArray[i].length-1);
+
+  console.log('word!: ', word);
+
+  searchXMLTags(word);
+
+
+}
+
+
+//========================================
+
+function creatingIndexTree(){
+  //OLD?
+  // was intneded to be for creating a tree branching system
+  var tmpArray = fromXMLStringToArray(XMLMe);
+  var arrayOfNodesIndexes = [];
+
+
+  var word1; var word2;
+  for(var i=0; i<tmpArray.length; i++){
+    // tmpArray.forEach((elem, index)=>{
+    //   if(elem.substring(0, 1)=='<')
+    // });
+    word1 = tmpArray[i].substring(1, tmpArray[i].length);
+    for(var j=0; j<tmpArray.length; j++){
+      word2 = tmpArray[j].substring(2, tmpArray[j].length);
+      if(word1==word2){
+        console.log('matched! ', j);
+        arrayOfNodesIndexes.push([i, j]);
+        debugger
+      }
+    }
+  }
+  console.log('XMLMe', XMLMe);
+  console.log('arrayOfNodesIndexes', arrayOfNodesIndexes);
+}
+
+
+
+
+
+
+
+
+
 
 //========================================
 // USE INSTEAD

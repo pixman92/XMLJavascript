@@ -25,3 +25,21 @@ I/O Of this framework(?)
 2020, 12, 03 - 21:27:53 ---  Working on the Editing (Just a single tag) - it's working! NEXT? - delete tags, pull data from tags, UID in a tag!
 
 2020, 12, 03 - 21:35:27 --- Pulling indexes from XMLMe - not working...NEXT? - pull data from within Tags
+
+2020, 12, 09 - 20:16:55 --- Simplify - current and (only) working file
+
+2020, 12, 09 - 20:26:55 --- makeXMLString - push to make a XML string
+
+2020, 12, 09 - 20:27:29 --- makeXMLFromArray - takes small Array, makes an XML
+
+2020, 12, 09 - 20:27:58 --- fromXMLStringToArray - XMLString - gets parsed into array of words
+
+2020, 12, 09 - 20:28:22 --- function bindForSaving - take array of elements and combine them
+
+2020, 12, 09 - 20:29:49 --- insertArrayIntoXML - spalces in arr2 into arr1
+
+2020, 12, 09 - 20:30:43 --- pullData - pulls all the data, sifts through it all, finds a matching search term
+
+2020, 12, 09 - 20:31:25 --- searchXMTags - pulls data, but returns 'indexes' of matched returned search terms
+
+2020, 12, 09 - 20:34:55 --- pullWholeTag - get the instances of searched tag, doesn't make the term editable
